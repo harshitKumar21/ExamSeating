@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>University Exam Seating</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen p-8">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-4xl font-extrabold text-center mb-10 text-blue-700">
+      🎓 University Exam Seating (Multi-Hall)
+    </h1>
+
+    <!-- Stage: upload -->
+    {% if stage == "upload" %}
+      <div class="max-w-lg mx-auto bg-white rounded-2xl shadow p-6 space-y-4">
+        <form action="/prepare" method="post" enctype="multipart/form-data" class="space-y-4">
+          <label class="block font-semibold">Upload Students CSV (id,name,subject)</label>
+          <input type="file" name="file" required class="block w-full border p-2 rounded">
+          <button class="w-full bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold">
+            Next: Choose Colors
+          </button>
+        </form>
+      </div>
+    {% endif %}
+
+    <!-- Stage: color mapping -->
+    {% if stage == "colors" %}
+      <div class="max-w-xl mx-auto bg-white rounded-2xl shadow p-6">
+        <form action="/generate" method="post" class="space-y-6">
+          <h2 class="text-xl font-semibold">Choose Subject Colors</h2>
+          <div class="grid grid-cols-2 gap-3">
+            {% for s in subjects %}
+              <label class="flex justify-between items-center border p-2 rounded-lg">
+                <span class="font-medium">{{ s }}</span>
+                <input type="color" name="color_{{ s }}" value="{{ colors[s] }}">
+              </label>
+            {% endfor %}
+          </div>
+          <button class="w-full bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-xl font-semibold">
+            Generate Seating
+          </button>
+        </form>
+      </div>
+    {% endif %}
+
+   <!-- Stage: results -->
+{% if stage == "result" %}
+  <!-- Global summary -->
+  <div class="bg-white rounded-2xl shadow p-6 mb-8">
+    <div class="flex flex-wrap items-center justify-between gap-4">
+      <div class="text-xl font-bold">
+        Overall Filled: {{ global_filled }} / {{ global_capacity }}
+      </div>
+      <div class="flex flex-wrap gap-2">
+        {% for subj, count in global_subjects.items() %}
+          <span class="px-3 py-1 rounded-full text-sm border" style="background-color: {{ colors.get(subj, '#e5e7eb') }}">
+            {{ subj }}: {{ count }}
+          </span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Vertical hall layout -->
+  <div class="space-y-10">
+    {% for hall, cfg in halls.items() %}
+      {% if hall in plans %}
+      <div class="bg-white rounded-2xl shadow p-6">
+        <h2 class="text-lg font-bold text-gray-800 mb-2">
+          {{ hall }} – Filled: {{ plans[hall].filled }}/{{ plans[hall].capacity }}
+        </h2>
+
+        <!-- Subject distribution pills per hall -->
+        <div class="flex flex-wrap gap-2 mb-4">
+          {% for subj, count in plans[hall].subj_counts.items() %}
+            <span class="px-3 py-1 text-sm rounded-full border" style="background-color: {{ colors.get(subj, '#e5e7eb') }}">
+              {{ subj }}: {{ count }}
+            </span>
+          {% endfor %}
+        </div>
+
+        <!-- Seating grid -->
+        <div class="overflow-auto">
+          <table class="border-collapse border border-gray-300 w-full text-center text-sm">
+            {% for r in range(cfg.rows) %}
+            <tr>
+              {% for c in range(cfg.cols) %}
+                {% set seat = plans[hall].seating.get((r,c)) %}
+                {% if seat %}
+                  {% set bg = colors.get(seat['subject'], '#e5e7eb') %}
+                  <td class="border border-gray-300 p-2 text-white font-semibold" style="background-color: {{ bg }}">
+                    <div>{{ seat.id }}</div>
+                    <div class="text-xs">{{ seat.name }}</div>
+                    <div class="text-xs font-bold">{{ seat.subject }}</div>
+                  </td>
+                {% else %}
+                  <td class="border border-gray-200 p-2 text-gray-400">Empty</td>
+                {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="mt-8 flex justify-center gap-4">
+    <a href="/download/csv" class="bg-blue-600 text-white px-5 py-3 rounded-xl">Download CSV</a>
+    <a href="/download/excel" class="bg-purple-600 text-white px-5 py-3 rounded-xl">Download Excel</a>
+    <a href="/download/pdf" class="bg-rose-600 text-white px-5 py-3 rounded-xl">Download PDF</a>
+    <a href="/" class="px-5 py-3 rounded-xl border">Start Over</a>
+  </div>
+{% endif %}
+
+  </div>
+</body>
+</html>
