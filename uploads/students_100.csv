@@ -1,0 +1,101 @@
+id,name,subject
+S001,Student_1,Chemistry
+S002,Student_2,Commerce
+S003,Student_3,Physics
+S004,Student_4,Mathematics
+S005,Student_5,Physics
+S006,Student_6,Mathematics
+S007,Student_7,Management
+S008,Student_8,Commerce
+S009,Student_9,Electronics
+S010,Student_10,Management
+S011,Student_11,Management
+S012,Student_12,Electronics
+S013,Student_13,Electronics
+S014,Student_14,Electronics
+S015,Student_15,Mechanical Engineering
+S016,Student_16,Physics
+S017,Student_17,Biology
+S018,Student_18,Mechanical Engineering
+S019,Student_19,Management
+S020,Student_20,Mechanical Engineering
+S021,Student_21,Electronics
+S022,Student_22,Electronics
+S023,Student_23,Chemistry
+S024,Student_24,Biology
+S025,Student_25,Biology
+S026,Student_26,Electronics
+S027,Student_27,Computer Science
+S028,Student_28,Commerce
+S029,Student_29,Commerce
+S030,Student_30,Civil Engineering
+S031,Student_31,Computer Science
+S032,Student_32,Management
+S033,Student_33,Mathematics
+S034,Student_34,Computer Science
+S035,Student_35,Management
+S036,Student_36,Electronics
+S037,Student_37,Mathematics
+S038,Student_38,Management
+S039,Student_39,Chemistry
+S040,Student_40,Mathematics
+S041,Student_41,Chemistry
+S042,Student_42,Civil Engineering
+S043,Student_43,Computer Science
+S044,Student_44,Mechanical Engineering
+S045,Student_45,Physics
+S046,Student_46,Civil Engineering
+S047,Student_47,Chemistry
+S048,Student_48,Mechanical Engineering
+S049,Student_49,Biology
+S050,Student_50,Biology
+S051,Student_51,Chemistry
+S052,Student_52,Biology
+S053,Student_53,Civil Engineering
+S054,Student_54,Physics
+S055,Student_55,Physics
+S056,Student_56,Electronics
+S057,Student_57,Mechanical Engineering
+S058,Student_58,Biology
+S059,Student_59,Physics
+S060,Student_60,Management
+S061,Student_61,Civil Engineering
+S062,Student_62,Civil Engineering
+S063,Student_63,Electronics
+S064,Student_64,Commerce
+S065,Student_65,Physics
+S066,Student_66,Mathematics
+S067,Student_67,Mathematics
+S068,Student_68,Civil Engineering
+S069,Student_69,Mathematics
+S070,Student_70,Computer Science
+S071,Student_71,Electronics
+S072,Student_72,Electronics
+S073,Student_73,Mathematics
+S074,Student_74,Management
+S075,Student_75,Mechanical Engineering
+S076,Student_76,Management
+S077,Student_77,Chemistry
+S078,Student_78,Civil Engineering
+S079,Student_79,Commerce
+S080,Student_80,Physics
+S081,Student_81,Computer Science
+S082,Student_82,Commerce
+S083,Student_83,Computer Science
+S084,Student_84,Commerce
+S085,Student_85,Mechanical Engineering
+S086,Student_86,Management
+S087,Student_87,Management
+S088,Student_88,Mechanical Engineering
+S089,Student_89,Management
+S090,Student_90,Mathematics
+S091,Student_91,Electronics
+S092,Student_92,Civil Engineering
+S093,Student_93,Civil Engineering
+S094,Student_94,Management
+S095,Student_95,Computer Science
+S096,Student_96,Electronics
+S097,Student_97,Computer Science
+S098,Student_98,Management
+S099,Student_99,Computer Science
+S100,Student_100,Physics
