@@ -1,6 +1,101 @@
-Row,Col,Student ID,Name,Subject
-0,0,S1,Alice,Math
-0,1,S2,Bob,Physics
-0,2,S3,Charlie,Chem
-0,3,S4,David,CS
-0,4,S5,Eva,Math
+Hall,Row,Col,Roll No,Name,Subject
+Hall 1 ,0,0,AUTO007,Student_7,Management
+Hall 1 ,0,1,AUTO009,Student_9,Electronics
+Hall 1 ,0,2,AUTO003,Student_3,Physics
+Hall 1 ,0,3,AUTO004,Student_4,Mathematics
+Hall 1 ,0,4,AUTO027,Student_27,Computer Science
+Hall 1 ,1,0,AUTO030,Student_30,Civil Engineering
+Hall 1 ,1,1,AUTO015,Student_15,Mechanical Engineering
+Hall 1 ,1,2,AUTO002,Student_2,Commerce
+Hall 1 ,1,3,AUTO001,Student_1,Chemistry
+Hall 1 ,1,4,AUTO017,Student_17,Biology
+Hall 1 ,2,0,AUTO010,Student_10,Management
+Hall 1 ,2,1,AUTO012,Student_12,Electronics
+Hall 1 ,2,2,AUTO005,Student_5,Physics
+Hall 1 ,2,3,AUTO006,Student_6,Mathematics
+Hall 1 ,2,4,AUTO031,Student_31,Computer Science
+Hall 1 ,3,0,AUTO042,Student_42,Civil Engineering
+Hall 1 ,3,1,AUTO018,Student_18,Mechanical Engineering
+Hall 1 ,3,2,AUTO008,Student_8,Commerce
+Hall 1 ,3,3,AUTO023,Student_23,Chemistry
+Hall 1 ,3,4,AUTO024,Student_24,Biology
+Hall 1 ,4,0,AUTO011,Student_11,Management
+Hall 1 ,4,1,AUTO013,Student_13,Electronics
+Hall 1 ,4,2,AUTO016,Student_16,Physics
+Hall 1 ,4,3,AUTO033,Student_33,Mathematics
+Hall 1 ,4,4,AUTO034,Student_34,Computer Science
+Lt 1,0,0,AUTO046,Student_46,Civil Engineering
+Lt 1,0,1,AUTO020,Student_20,Mechanical Engineering
+Lt 1,0,2,AUTO028,Student_28,Commerce
+Lt 1,0,3,AUTO039,Student_39,Chemistry
+Lt 1,1,0,AUTO025,Student_25,Biology
+Lt 1,1,1,AUTO019,Student_19,Management
+Lt 1,1,2,AUTO014,Student_14,Electronics
+Lt 1,1,3,AUTO045,Student_45,Physics
+Lt 1,2,0,AUTO037,Student_37,Mathematics
+Lt 1,2,1,AUTO043,Student_43,Computer Science
+Lt 1,2,2,AUTO053,Student_53,Civil Engineering
+Lt 1,2,3,AUTO044,Student_44,Mechanical Engineering
+Lt 1,3,0,AUTO029,Student_29,Commerce
+Lt 1,3,1,AUTO041,Student_41,Chemistry
+Lt 1,3,2,AUTO049,Student_49,Biology
+Lt 1,3,3,AUTO032,Student_32,Management
+Lt 1,4,0,AUTO021,Student_21,Electronics
+Lt 1,4,1,AUTO054,Student_54,Physics
+Lt 1,4,2,AUTO040,Student_40,Mathematics
+Lt 1,4,3,AUTO070,Student_70,Computer Science
+Lt 1,5,0,AUTO061,Student_61,Civil Engineering
+Lt 1,5,1,AUTO048,Student_48,Mechanical Engineering
+Lt 1,5,2,AUTO064,Student_64,Commerce
+Lt 1,5,3,AUTO047,Student_47,Chemistry
+Lt 1,6,0,AUTO050,Student_50,Biology
+Lt 1,6,1,AUTO035,Student_35,Management
+Lt 1,6,2,AUTO022,Student_22,Electronics
+Lt 1,6,3,AUTO055,Student_55,Physics
+Lt 1,7,0,AUTO066,Student_66,Mathematics
+Lt 1,7,1,AUTO081,Student_81,Computer Science
+Lt 1,7,2,AUTO062,Student_62,Civil Engineering
+Lt 1,7,3,AUTO057,Student_57,Mechanical Engineering
+Lt 1,8,0,AUTO079,Student_79,Commerce
+Lt 1,8,1,AUTO051,Student_51,Chemistry
+Lt 1,8,2,AUTO052,Student_52,Biology
+Lt 1,8,3,AUTO038,Student_38,Management
+Lt 1,9,0,AUTO026,Student_26,Electronics
+Lt 1,9,1,AUTO059,Student_59,Physics
+Lt 1,9,2,AUTO067,Student_67,Mathematics
+Lt 1,9,3,AUTO083,Student_83,Computer Science
+Hall 1,0,0,AUTO068,Student_68,Civil Engineering
+Hall 1,0,1,AUTO075,Student_75,Mechanical Engineering
+Hall 1,0,2,AUTO082,Student_82,Commerce
+Hall 1,0,3,AUTO077,Student_77,Chemistry
+Hall 1,0,4,AUTO058,Student_58,Biology
+Hall 1,0,5,AUTO060,Student_60,Management
+Hall 1,0,6,AUTO036,Student_36,Electronics
+Hall 1,0,7,AUTO065,Student_65,Physics
+Hall 1,1,0,AUTO069,Student_69,Mathematics
+Hall 1,1,1,AUTO095,Student_95,Computer Science
+Hall 1,1,2,AUTO073,Student_73,Mathematics
+Hall 1,1,3,AUTO097,Student_97,Computer Science
+Hall 1,1,4,AUTO090,Student_90,Mathematics
+Hall 1,1,5,AUTO099,Student_99,Computer Science
+Hall 1,2,0,AUTO078,Student_78,Civil Engineering
+Hall 1,2,1,AUTO085,Student_85,Mechanical Engineering
+Hall 1,2,2,AUTO084,Student_84,Commerce
+Hall 1,2,3,AUTO074,Student_74,Management
+Hall 1,2,4,AUTO056,Student_56,Electronics
+Hall 1,2,5,AUTO080,Student_80,Physics
+Hall 1,2,6,AUTO092,Student_92,Civil Engineering
+Hall 1,2,7,AUTO088,Student_88,Mechanical Engineering
+Hall 1,4,0,AUTO076,Student_76,Management
+Hall 1,4,1,AUTO063,Student_63,Electronics
+Hall 1,4,2,AUTO100,Student_100,Physics
+Hall 1,4,3,AUTO093,Student_93,Civil Engineering
+Hall 1,4,4,AUTO086,Student_86,Management
+Hall 1,4,5,AUTO071,Student_71,Electronics
+Hall 1,4,6,AUTO087,Student_87,Management
+Hall 1,4,7,AUTO072,Student_72,Electronics
+LT 2,0,0,AUTO089,Student_89,Management
+LT 2,1,0,AUTO091,Student_91,Electronics
+LT 2,2,0,AUTO094,Student_94,Management
+LT 2,3,0,AUTO096,Student_96,Electronics
+LT 2,4,0,AUTO098,Student_98,Management

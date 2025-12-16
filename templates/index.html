@@ -1,79 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Exam Seating</title>
+  <title>Exam Seating Arrangement</title>
+  {% if error %}
+<div class="bg-red-100 border border-red-400 text-red-700 p-3 rounded mb-4 text-center">
+  {{ error }}
+</div>
+{% endif %}
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 p-6">
 
 <h1 class="text-3xl font-bold text-center mb-6">
-  🎓 University Exam Seating
+  🎓 University Exam Seating Arrangement
 </h1>
 
+<!-- ================= UPLOAD STAGE ================= -->
 {% if stage == "upload" %}
 <form action="/prepare" method="post" enctype="multipart/form-data"
       class="bg-white p-6 max-w-md mx-auto rounded shadow">
-  <input type="file" name="file" required class="mb-4">
+  <input type="file" name="file" required class="mb-4 w-full">
   <button class="bg-blue-600 text-white px-4 py-2 rounded w-full">
-    Upload CSV
+    Upload Student CSV
   </button>
 </form>
 {% endif %}
 
+<!-- ================= COLOR + HALL STAGE ================= -->
 {% if stage == "colors" %}
 <form action="/generate" method="post"
-      class="bg-white p-6 max-w-lg mx-auto rounded shadow">
-  <h2 class="font-bold mb-4">Choose Colors</h2>
+      class="bg-white p-6 max-w-xl mx-auto rounded shadow">
+
+  <p class="text-sm mb-2 text-gray-600">
+    Total Students: <b>{{ student_count }}</b>
+  </p>
+
+  <h2 class="font-bold mb-4">Subject Color Mapping</h2>
   {% for s in subjects %}
-    <div class="flex justify-between mb-2">
-      <span>{{ s }}</span>
-      <input type="color" name="color_{{ s }}" value="{{ colors[s] }}">
-    </div>
+  <div class="flex justify-between items-center mb-2">
+    <span class="text-sm">{{ s }}</span>
+    <input type="color" name="color_{{ s }}" value="{{ colors[s] }}">
+  </div>
   {% endfor %}
-  <button class="bg-green-600 text-white px-4 py-2 rounded w-full mt-4">
+
+  <hr class="my-4">
+
+  <h3 class="font-bold mb-2">Add Examination Halls</h3>
+
+  <div id="halls-container" class="space-y-2"></div>
+
+  <button type="button" onclick="addHall()"
+          class="text-blue-600 text-sm">
+    ➕ Add Hall
+  </button>
+
+  <button id="generateBtn"
+          class="bg-green-600 text-white px-4 py-2 rounded w-full mt-4"
+          disabled>
     Generate Seating
   </button>
 </form>
 {% endif %}
 
+<!-- ================= RESULT STAGE ================= -->
 {% if stage == "result" %}
-<div class="mb-4 font-bold">
-  Overall Filled: {{ global_filled }} / {{ global_capacity }}
+
+<div class="mb-4 text-center font-bold">
+  Total Filled: {{ global_filled }} / {{ global_capacity }}
 </div>
 
-{% for hall, cfg in halls.items() %}
-  <div class="bg-white p-4 mb-6 rounded shadow">
-    <h2 class="font-bold mb-2">
-      {{ hall }} ({{ plans[hall].filled }}/{{ plans[hall].capacity }})
-    </h2>
+{% if has_overflow %}
+<div class="bg-red-100 border border-red-400 text-red-700 p-3 rounded mb-4 text-center">
+  ⚠ {{ overflow }} students could not be seated due to insufficient hall capacity.
+</div>
 
-    <table class="border-collapse w-full text-sm">
-      {% for r in range(plans[hall].rows) %}
-      <tr>
-        {% for c in range(plans[hall].cols) %}
-          {% set s = plans[hall].seating.get((r,c)) %}
-          {% if s %}
-          <td class="border p-2 text-white text-center"
-              style="background: {{ colors[s.subject] }}">
-            <div class="font-bold">{{ s.roll_no }}</div>
-            <div class="text-xs">{{ s.name }}</div>
-            <div class="text-xs">{{ s.subject }}</div>
-          </td>
-          {% else %}
-          <td class="border p-2 text-center text-gray-400">Empty</td>
-          {% endif %}
-        {% endfor %}
-      </tr>
-      {% endfor %}
-    </table>
+<form action="/prepare" method="post" class="text-center mb-6">
+  <p class="text-sm text-gray-600 mb-2">
+    Add more halls to seat remaining students
+  </p>
+  <button class="bg-orange-600 text-white px-4 py-2 rounded">
+    ➕ Add More Halls
+  </button>
+</form>
+{% endif %}
+
+<!-- ========= SUBJECT COLOR LEGEND ========= -->
+<div class="flex flex-wrap gap-2 justify-center mb-6 text-xs">
+  {% for subj, clr in colors.items() %}
+    <span class="px-2 py-1 rounded text-white"
+          style="background: {{ clr }}">
+      {{ subj }}
+    </span>
+  {% endfor %}
+</div>
+
+<!-- ================= HALL-WISE SEATING ================= -->
+{% for hall in halls %}
+<div class="bg-white p-4 mb-8 rounded shadow">
+
+  <h2 class="font-bold mb-1">
+    {{ hall }} ({{ plans[hall].filled }}/{{ plans[hall].capacity }})
+  </h2>
+
+  <!-- ===== SUBJECT COUNT PER HALL ===== -->
+  <div class="flex flex-wrap gap-2 mb-3 text-xs">
+    {% for subj, cnt in plans[hall].subjects.items() %}
+      <span class="px-2 py-1 rounded text-white"
+            style="background: {{ colors[subj] }}">
+        {{ subj }} : {{ cnt }}
+      </span>
+    {% endfor %}
   </div>
+
+  <!-- ===== SEATING GRID ===== -->
+  <table class="w-full border-collapse text-xs">
+    {% for r in range(plans[hall].rows) %}
+    <tr>
+      {% for c in range(plans[hall].cols) %}
+      {% set s = plans[hall].seating.get((r,c)) %}
+      <td class="border p-1 text-center text-xs"
+    style="background: {{ colors[s.subject] if s else '#f3f4f6' }};
+           color: {{ 'white' if s else 'gray' }}">
+
+  {% if s %}
+    <div class="text-[10px] font-semibold">{{ s.seat }}</div>
+    <div class="font-bold">{{ s.roll_no }}</div>
+    <div class="text-[10px]">{{ s.subject }}</div>
+  {% else %}
+    <div class="text-[10px]">R{{ r+1 }}C{{ c+1 }}</div>
+    Empty
+  {% endif %}
+
+</td>
+
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+
+</div>
 {% endfor %}
 
-<div class="flex gap-4">
-  <a href="/download/csv" class="bg-blue-600 text-white px-4 py-2 rounded">CSV</a>
-  <a href="/" class="bg-gray-600 text-white px-4 py-2 rounded">Start Over</a>
+<!-- ================= DOWNLOAD ACTIONS ================= -->
+<div class="flex gap-4 justify-center">
+  <a href="/download/csv" class="bg-blue-600 text-white px-4 py-2 rounded">
+    Download CSV
+  </a>
+  <a href="/download/pdf" class="bg-red-600 text-white px-4 py-2 rounded">
+    Download PDF
+  </a>
+  <a href="/" class="bg-gray-600 text-white px-4 py-2 rounded">
+    Reset
+  </a>
 </div>
+
 {% endif %}
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function addHall() {
+  const div = document.createElement("div");
+  div.className = "flex gap-2 items-center";
+  div.innerHTML = `
+    <input name="hall_name[]" placeholder="Hall Name"
+           class="border p-2 w-1/3" required>
+    <input name="rows[]" type="number" min="1"
+           placeholder="Rows" class="border p-2 w-1/3" required>
+    <input name="cols[]" type="number" min="1"
+           placeholder="Columns" class="border p-2 w-1/3" required>
+    <button type="button"
+            onclick="this.parentElement.remove()"
+            class="text-red-600 font-bold">✖</button>
+  `;
+  document.getElementById("halls-container").appendChild(div);
+  document.getElementById("generateBtn").disabled = false;
+}
+</script>
 
 </body>
 </html>
